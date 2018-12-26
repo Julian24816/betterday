@@ -39,7 +39,7 @@ public class DefaultUI implements UI {
     }
 
     @Override
-    public void shutdown() {
+    public void close() {
         scanner.close();
     }
 }

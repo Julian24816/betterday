@@ -1,58 +1,44 @@
 package de.julian.betterday.app.cla;
 
 import de.julian.betterday.app.App;
-import de.julian.betterday.app.cla.command.Command;
-import de.julian.betterday.app.cla.command.Exit;
-import de.julian.betterday.app.cla.ui.DefaultUI;
-import de.julian.betterday.app.cla.ui.UI;
+import de.julian.betterday.app.cla.command.*;
+import de.julian.betterday.app.cla.ui.*;
 
 public class CommandLineApp extends App {
 
-    private static final String WELCOME_MESSAGE = "Hello Julian!\n" +
-            "Still using the Command-Line-App? Well, it's you choice...";
-    private static final String TEARDOWN_MESSAGE = "Bye.";
-
     private UI ui;
+    private CommandParser commandParser;
 
     @Override
     protected void setup() {
         ui = new DefaultUI();
-        ui.outputLine(WELCOME_MESSAGE);
+        ui.outputLine("Hello Julian!\nStill using the Command-Line-App? Well, it's you choice...");
         ui.separator();
+        commandParser = new TopLevelCommandParser();
     }
 
     @Override
     protected void loop() {
-        printOptions();
+        outputOptions();
         Command command = parseNextCommand();
         if (command instanceof Exit) done();
         else command.execute();
     }
 
-    private void printOptions() {
-        ui.outputLine(getMenu());
+    private void outputOptions() {
+        ui.outputLine(commandParser.listAvailableCommands());
     }
 
     private Command parseNextCommand() {
-        ui.promptInputLine(getPrompt());
-        return new Exit();
-    }
-
-    private String getMenu() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("nothing on the menu yet.\n");
-        stringBuilder.append("sorry.");
-        return stringBuilder.toString();
-    }
-
-    private String getPrompt() {
-        return "> ";
+        String prompt = commandParser.getPrompt();
+        String choice = ui.promptInputLine(prompt);
+        return commandParser.parse(choice);
     }
 
     @Override
     protected void teardown() {
-        ui.shutdown();
+        ui.close();
         ui = null;
-        System.out.println(TEARDOWN_MESSAGE);
+        System.out.println("Bye.");
     }
 }

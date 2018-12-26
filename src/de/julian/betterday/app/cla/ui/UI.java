@@ -5,5 +5,5 @@ public interface UI {
     String inputLine();
     void outputLine(String output);
     void separator();
-    void shutdown();
+    void close();
 }
