@@ -1,34 +1,41 @@
 package de.julian.betterday.app.cla;
 
 import de.julian.betterday.app.App;
-
-import java.util.Scanner;
+import de.julian.betterday.app.cla.command.Command;
+import de.julian.betterday.app.cla.command.Exit;
+import de.julian.betterday.app.cla.ui.DefaultUI;
+import de.julian.betterday.app.cla.ui.UI;
 
 public class CommandLineApp extends App {
 
-    private static final String SEPARATOR = "----------------------------------------------------------";
     private static final String WELCOME_MESSAGE = "Hello Julian!\n" +
-            "Still using the Command-Line-App? Well, it's you choice...\n" + SEPARATOR + "\n";
+            "Still using the Command-Line-App? Well, it's you choice...";
     private static final String TEARDOWN_MESSAGE = "Bye.";
 
-    private Scanner scanner;
+    private UI ui;
 
     @Override
     protected void setup() {
-        System.out.println(WELCOME_MESSAGE);
-        scanner = new Scanner(System.in);
+        ui = new DefaultUI();
+        ui.outputLine(WELCOME_MESSAGE);
+        ui.separator();
     }
 
     @Override
     protected void loop() {
-        System.out.println(getMenu());
-        getCommand();
-        System.out.println("Nothing happens yet.");
-        System.out.println(SEPARATOR);
-        System.out.println();
-        getCommand();
-        System.out.println("Nothing happens yet.");
-        done();
+        printOptions();
+        Command command = parseNextCommand();
+        if (command instanceof Exit) done();
+        else command.execute();
+    }
+
+    private void printOptions() {
+        ui.outputLine(getMenu());
+    }
+
+    private Command parseNextCommand() {
+        ui.promptInputLine(getPrompt());
+        return new Exit();
     }
 
     private String getMenu() {
@@ -38,18 +45,14 @@ public class CommandLineApp extends App {
         return stringBuilder.toString();
     }
 
-    private void getCommand() {
-        System.out.print(getPrompt());
-        scanner.next();
-    }
-
     private String getPrompt() {
         return "> ";
     }
 
     @Override
     protected void teardown() {
-        scanner.close();
+        ui.shutdown();
+        ui = null;
         System.out.println(TEARDOWN_MESSAGE);
     }
 }
