@@ -22,7 +22,7 @@ public class CommandLineApp extends App {
         outputOptions();
         Command command = parseNextCommand();
         if (command instanceof Exit) done();
-        else command.execute();
+        else command.execute(ui);
     }
 
     private void outputOptions() {

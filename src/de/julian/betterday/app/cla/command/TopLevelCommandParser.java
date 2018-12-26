@@ -3,7 +3,9 @@ package de.julian.betterday.app.cla.command;
 public class TopLevelCommandParser extends CommandParser {
     @Override
     public Command parse(String string) {
-        return new Exit();
+        if (string.equals("exit"))
+            return new Exit();
+        return new UnknownCommand(string);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package de.julian.betterday.app.cla.command;
 
+import de.julian.betterday.app.cla.ui.UI;
+
 public class Exit extends Command {
     @Override
-    public void execute() {
+    public void execute(UI ui) {
         throw new IllegalStateException("On receiving Exit Command the Command Line Interface should exit immediately.");
     }
 
