@@ -1,7 +1,9 @@
 package de.julian.betterday;
 
+import de.julian.betterday.app.cla.CommandLineApp;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Nothing happens yet.");
+        new CommandLineApp().run();
     }
 }
