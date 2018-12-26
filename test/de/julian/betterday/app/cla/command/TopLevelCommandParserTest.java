@@ -16,16 +16,16 @@ class TopLevelCommandParserTest {
 
     @Test
     void parseExitTest() {
-        assertStringPassesAs("exit", new Exit());
+        assertStringParsesAs("exit", new Exit());
     }
 
     @Test
     void parseUnknownCommandTest() {
         String text = "alkdsjf";
-        assertStringPassesAs(text, new UnknownCommand(text));
+        assertStringParsesAs(text, new UnknownCommand(text));
     }
 
-    private void assertStringPassesAs(String string, Command expected) {
+    private void assertStringParsesAs(String string, Command expected) {
         Command actual = commandParser.parse(string);
         assertEquals(expected, actual);
     }
