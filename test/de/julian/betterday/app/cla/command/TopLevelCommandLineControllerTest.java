@@ -9,6 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class TopLevelCommandLineControllerTest {
 
+    //TODO many more tests
+
     private CommandLineController commandLineController;
 
     @BeforeEach
@@ -19,12 +21,6 @@ class TopLevelCommandLineControllerTest {
     @Test
     void parseExitTest() {
         assertStringParsesAs("exit", new Exit());
-    }
-
-    @Test
-    void parseUnknownCommandTest() {
-        String text = "alkdsjf";
-        assertStringParsesAs(text, new UnknownCommand(text));
     }
 
     private void assertStringParsesAs(String string, Command expected) {

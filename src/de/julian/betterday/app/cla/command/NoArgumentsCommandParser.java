@@ -3,39 +3,27 @@ package de.julian.betterday.app.cla.command;
 import de.julian.betterday.app.cla.Command;
 import de.julian.betterday.app.cla.CommandParser;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
 
-class NoArgumentsCommandParser implements CommandParser {
+abstract class NoArgumentsCommandParser implements CommandParser {
     private final String key;
-    private final Class<? extends Command> commandClass;
     private final String helpMenuDescription;
 
-    NoArgumentsCommandParser(String key, Class<? extends Command> commandClass, String helpMenuDescription) {
-        this.helpMenuDescription = helpMenuDescription;
-        assert hasDefaultConstructor(commandClass);
-        this.key = key;
-        this.commandClass = commandClass;
-    }
+    protected abstract Command getCommandInstance();
 
-    private boolean hasDefaultConstructor(Class<? extends Command> commandClass) {
-        for (Constructor constructor : commandClass.getConstructors())
-            if (constructor.getParameterCount() == 0)
-                return true;
-        return false;
+    NoArgumentsCommandParser(String key, String helpMenuDescription) {
+        this.key = key;
+        this.helpMenuDescription = helpMenuDescription;
     }
 
     @Override
     public Command parse(String[] tokens) throws CommandParseException{
-        if (tokens.length != 1) ; //TODO output error
-        if (!tokens[0].equals(key))
-            throw new CommandParseException(String.format("illegal token for %s-command parser: %s", key, tokens[0]));
-        try {
-            return commandClass.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            e.printStackTrace();
-            throw new CommandParseException("unexpected exception while trying to instantiate " + commandClass);
-        }
+        assert tokens.length > 0 : key + "-command-parse was called with 0 tokens";
+        assert tokens[0].equals(key) : "illegal command name for " + key + "-command parser: " + tokens[0];
+        if (tokens.length > 1)
+            throw new CommandParseException("illegal arguments for command " + key + ": '" +
+                    String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length)) + "'.");
+        return getCommandInstance();
     }
 
     @Override

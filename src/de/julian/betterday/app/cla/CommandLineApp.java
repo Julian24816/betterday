@@ -1,7 +1,6 @@
 package de.julian.betterday.app.cla;
 
 import de.julian.betterday.app.App;
-import de.julian.betterday.app.cla.command.CommandParseException;
 import de.julian.betterday.app.cla.command.Exit;
 import de.julian.betterday.app.cla.command.TopLevelCommandLineController;
 
@@ -20,21 +19,16 @@ public class CommandLineApp extends App {
 
     @Override
     protected void loop() {
-        outputOptions(); //TODO move to help
         Command command = null;
         command = parseNextCommand();
         if (command instanceof Exit) done();
         else command.execute(ui);
     }
 
-    private void outputOptions() {
-        ui.outputLine(commandLineController.listAvailableCommands());
-    }
-
     private Command parseNextCommand() {
         String prompt = commandLineController.getPrompt();
         String choice = ui.promptInputLine(prompt);
-        return commandLineController.parse(choice.trim());
+        return commandLineController.parse(choice);
     }
 
     @Override

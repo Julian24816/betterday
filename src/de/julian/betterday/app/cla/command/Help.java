@@ -11,4 +11,13 @@ abstract class Help extends Command {
     }
 
     protected abstract CommandLineController getCommandLineControllerInstance();
+
+    public static Help createCommandFor(CommandLineController commandLineController) {
+        return new Help() {
+            @Override
+            protected CommandLineController getCommandLineControllerInstance() {
+                return commandLineController;
+            }
+        };
+    }
 }
