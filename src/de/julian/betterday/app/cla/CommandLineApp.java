@@ -2,10 +2,9 @@ package de.julian.betterday.app.cla;
 
 import de.julian.betterday.app.App;
 import de.julian.betterday.app.cla.command.Exit;
-import de.julian.betterday.app.cla.command.TopLevelCommandLineController;
+import de.julian.betterday.app.cla.controller.TopLevelCommandLineController;
 
 public class CommandLineApp extends App {
-
     private UI ui;
     private CommandLineController commandLineController;
 

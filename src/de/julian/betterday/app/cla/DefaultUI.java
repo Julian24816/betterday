@@ -1,7 +1,5 @@
 package de.julian.betterday.app.cla;
 
-import de.julian.betterday.app.cla.UI;
-
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
@@ -15,7 +13,7 @@ public class DefaultUI implements UI {
         this.outputStream = outputStream;
     }
 
-    public DefaultUI() {
+    DefaultUI() {
         this(System.in, System.out);
     }
 

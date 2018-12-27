@@ -1,6 +1,6 @@
-package de.julian.betterday.app.cla.command;
+package de.julian.betterday.app.cla.controller;
 
-public class CommandParseException extends Exception {
+class CommandParseException extends Exception {
     private static final String HELP_MESSAGE = " Use 'help' for a list of commands.";
 
     CommandParseException(String message) {

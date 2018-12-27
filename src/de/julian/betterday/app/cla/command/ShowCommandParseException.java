@@ -2,10 +2,11 @@ package de.julian.betterday.app.cla.command;
 
 import de.julian.betterday.app.cla.Command;
 import de.julian.betterday.app.cla.UI;
+import de.julian.betterday.app.cla.controller.CommandParseException;
 
-public class ShowParseError extends Command {
+public class ShowCommandParseException extends Command {
     private String message;
-    ShowParseError(CommandParseException e) {
+    public ShowCommandParseException(CommandParseException e) {
         message = e.getMessage();
     }
 

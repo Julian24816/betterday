@@ -1,11 +1,12 @@
-package de.julian.betterday.app.cla.command;
+package de.julian.betterday.app.cla.controller;
 
 import de.julian.betterday.app.cla.Command;
-import de.julian.betterday.app.cla.CommandParser;
+import de.julian.betterday.app.cla.controller.CommandParseException;
+import de.julian.betterday.app.cla.controller.CommandParser;
 
 import java.util.Arrays;
 
-abstract class NoArgumentsCommandParser implements CommandParser {
+public abstract class NoArgumentsCommandParser implements CommandParser {
     private final String key;
     private final String helpMenuDescription;
 
@@ -17,7 +18,7 @@ abstract class NoArgumentsCommandParser implements CommandParser {
     }
 
     @Override
-    public Command parse(String[] tokens) throws CommandParseException{
+    public Command parse(String[] tokens) throws CommandParseException {
         assert tokens.length > 0 : key + "-command-parse was called with 0 tokens";
         assert tokens[0].equals(key) : "illegal command name for " + key + "-command parser: " + tokens[0];
         if (tokens.length > 1)
