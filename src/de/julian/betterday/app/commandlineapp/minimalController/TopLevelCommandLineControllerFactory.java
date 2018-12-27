@@ -1,4 +1,4 @@
-package de.julian.betterday.app.commandlineapp.controller;
+package de.julian.betterday.app.commandlineapp.minimalController;
 
 import de.julian.betterday.app.commandlineapp.CommandLineController;
 import de.julian.betterday.app.commandlineapp.CommandLineControllerFactory;

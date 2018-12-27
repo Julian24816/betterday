@@ -1,4 +1,4 @@
-package de.julian.betterday.app.commandlineapp.controller;
+package de.julian.betterday.app.commandlineapp.minimalController;
 
 import java.util.Map;
 

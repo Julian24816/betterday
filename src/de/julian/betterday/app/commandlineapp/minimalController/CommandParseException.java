@@ -1,4 +1,4 @@
-package de.julian.betterday.app.commandlineapp.controller;
+package de.julian.betterday.app.commandlineapp.minimalController;
 
 class CommandParseException extends Exception {
     private static final String HELP_MESSAGE = " Use 'help' for a list of commands.";
