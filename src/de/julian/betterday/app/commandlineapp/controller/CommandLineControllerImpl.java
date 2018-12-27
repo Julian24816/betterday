@@ -1,8 +1,8 @@
-package de.julian.betterday.app.cla.controller;
+package de.julian.betterday.app.commandlineapp.controller;
 
-import de.julian.betterday.app.cla.Command;
-import de.julian.betterday.app.cla.CommandLineController;
-import de.julian.betterday.app.cla.UI;
+import de.julian.betterday.app.commandlineapp.Command;
+import de.julian.betterday.app.commandlineapp.CommandLineController;
+import de.julian.betterday.app.commandlineapp.UI;
 
 import java.util.HashMap;
 import java.util.List;

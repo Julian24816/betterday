@@ -1,7 +1,7 @@
-package de.julian.betterday.app.cla.controller;
+package de.julian.betterday.app.commandlineapp.controller;
 
-import de.julian.betterday.app.cla.CommandLineController;
-import de.julian.betterday.app.cla.CommandLineControllerFactory;
+import de.julian.betterday.app.commandlineapp.CommandLineController;
+import de.julian.betterday.app.commandlineapp.CommandLineControllerFactory;
 
 public class TopLevelCommandLineControllerFactory extends CommandLineControllerFactory {
     @Override

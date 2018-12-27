@@ -1,7 +1,7 @@
-package de.julian.betterday.app.cla.controller;
+package de.julian.betterday.app.commandlineapp.controller;
 
-import de.julian.betterday.app.cla.Command;
-import de.julian.betterday.app.cla.UI;
+import de.julian.betterday.app.commandlineapp.Command;
+import de.julian.betterday.app.commandlineapp.UI;
 
 class ExitCommand extends Command {
     @Override

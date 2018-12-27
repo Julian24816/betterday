@@ -1,4 +1,4 @@
-package de.julian.betterday.app.cla;
+package de.julian.betterday.app.commandlineapp;
 
 public interface UI {
     String promptInputLine(String prompt);

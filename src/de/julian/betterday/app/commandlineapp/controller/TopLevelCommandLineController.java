@@ -1,4 +1,4 @@
-package de.julian.betterday.app.cla.controller;
+package de.julian.betterday.app.commandlineapp.controller;
 
 import java.util.Map;
 
