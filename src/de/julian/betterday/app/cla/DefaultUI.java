@@ -4,7 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class DefaultUI implements UI {
+class DefaultUI implements UI {
     private PrintStream outputStream;
     private Scanner scanner;
 

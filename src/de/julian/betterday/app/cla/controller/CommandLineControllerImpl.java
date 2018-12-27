@@ -3,7 +3,6 @@ package de.julian.betterday.app.cla.controller;
 import de.julian.betterday.app.cla.Command;
 import de.julian.betterday.app.cla.CommandLineController;
 import de.julian.betterday.app.cla.UI;
-import de.julian.betterday.app.cla.command.ShowCommandParseException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,17 +24,12 @@ abstract class CommandLineControllerImpl implements CommandLineController {
 
     public Command parse(String string) {
         String[] tokens = string.trim().split(" ");
-        if (tokens.length == 0 || tokens[0].equals("")) return doNothingCommand();
-        if (!commandMap.containsKey(tokens[0])) return unknownCommand(string);
-        try {
-            return commandMap.get(tokens[0]).parse(tokens);
-        } catch (CommandParseException e) {
-            return new ShowCommandParseException(e);
-        }
+        if (isEmptyCommand(tokens)) return doNothingCommand();
+        return getCommandOrExceptionDisplayCommand(tokens);
     }
 
-    private Command unknownCommand(String string) {
-        return new ShowCommandParseException(new CommandParseException("Unknown command '" + string + "'."));
+    private boolean isEmptyCommand(String[] tokens) {
+        return tokens.length == 0 || tokens[0].equals("");
     }
 
     private Command doNothingCommand() {
@@ -45,6 +39,23 @@ abstract class CommandLineControllerImpl implements CommandLineController {
                 // do nothing
             }
         };
+    }
+
+    private Command getCommandOrExceptionDisplayCommand(String[] tokens) {
+        try {
+            return getCommandOrException(tokens);
+        } catch (CommandParseException e) {
+            return new ShowCommandParseExceptionCommand(e);
+        }
+    }
+
+    private Command getCommandOrException(String[] tokens) throws CommandParseException {
+        if (!commandMap.containsKey(tokens[0])) throw unknownCommandException(String.join(" ", tokens));
+        return commandMap.get(tokens[0]).parse(tokens);
+    }
+
+    private CommandParseException unknownCommandException(String string) {
+        return new CommandParseException("Unknown command '" + string + "'.");
     }
 
     public String listAvailableCommands() {
@@ -65,4 +76,8 @@ abstract class CommandLineControllerImpl implements CommandLineController {
                     .sorted(Map.Entry.comparingByKey()).collect(Collectors.toList());
     }
 
+    @Override
+    public boolean isExitCommand(Command command) {
+        return command instanceof ExitCommand;
+    }
 }

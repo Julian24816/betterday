@@ -1,12 +1,11 @@
-package de.julian.betterday.app.cla.command;
+package de.julian.betterday.app.cla.controller;
 
 import de.julian.betterday.app.cla.Command;
 import de.julian.betterday.app.cla.UI;
-import de.julian.betterday.app.cla.controller.CommandParseException;
 
-public class ShowCommandParseException extends Command {
+class ShowCommandParseExceptionCommand extends Command {
     private String message;
-    public ShowCommandParseException(CommandParseException e) {
+    ShowCommandParseExceptionCommand(CommandParseException e) {
         message = e.getMessage();
     }
 

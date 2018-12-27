@@ -1,12 +1,10 @@
 package de.julian.betterday.app.cla.controller;
 
 import de.julian.betterday.app.cla.Command;
-import de.julian.betterday.app.cla.controller.CommandParseException;
-import de.julian.betterday.app.cla.controller.CommandParser;
 
 import java.util.Arrays;
 
-public abstract class NoArgumentsCommandParser implements CommandParser {
+abstract class NoArgumentsCommandParser implements CommandParser {
     private final String key;
     private final String helpMenuDescription;
 
@@ -30,5 +28,14 @@ public abstract class NoArgumentsCommandParser implements CommandParser {
     @Override
     public String getHelpMenuDescription() {
         return helpMenuDescription;
+    }
+
+    static NoArgumentsCommandParser forReusableCommand(String key, String helpMenuDescription, Command command) {
+        return new NoArgumentsCommandParser(key, helpMenuDescription) {
+            @Override
+            protected Command getCommandInstance() {
+                return command;
+            }
+        };
     }
 }

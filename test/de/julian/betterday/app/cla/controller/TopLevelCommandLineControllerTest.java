@@ -1,8 +1,6 @@
-package de.julian.betterday.app.cla.command;
+package de.julian.betterday.app.cla.controller;
 
 import de.julian.betterday.app.cla.Command;
-import de.julian.betterday.app.cla.controller.CommandLineControllerImpl;
-import de.julian.betterday.app.cla.controller.TopLevelCommandLineController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +19,7 @@ class TopLevelCommandLineControllerTest {
 
     @Test
     void parseExitTest() {
-        assertStringParsesAs("exit", new Exit());
+        assertStringParsesAs("exit", new ExitCommand());
     }
 
     private void assertStringParsesAs(String string, Command expected) {
