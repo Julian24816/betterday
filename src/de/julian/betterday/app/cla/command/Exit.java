@@ -1,6 +1,7 @@
 package de.julian.betterday.app.cla.command;
 
-import de.julian.betterday.app.cla.ui.UI;
+import de.julian.betterday.app.cla.Command;
+import de.julian.betterday.app.cla.UI;
 
 public class Exit extends Command {
     @Override

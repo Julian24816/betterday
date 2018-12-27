@@ -1,17 +1,19 @@
 package de.julian.betterday.app.cla.command;
 
+import de.julian.betterday.app.cla.Command;
+import de.julian.betterday.app.cla.CommandLineController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class TopLevelCommandParserTest {
+class TopLevelCommandLineControllerTest {
 
-    private CommandParser commandParser;
+    private CommandLineController commandLineController;
 
     @BeforeEach
     void setUp() {
-        commandParser = new TopLevelCommandParser();
+        commandLineController = new TopLevelCommandLineController();
     }
 
     @Test
@@ -26,7 +28,7 @@ class TopLevelCommandParserTest {
     }
 
     private void assertStringParsesAs(String string, Command expected) {
-        Command actual = commandParser.parse(string);
+        Command actual = commandLineController.parse(string);
         assertEquals(expected, actual);
     }
 }

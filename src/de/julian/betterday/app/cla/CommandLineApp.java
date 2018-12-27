@@ -1,38 +1,40 @@
 package de.julian.betterday.app.cla;
 
 import de.julian.betterday.app.App;
-import de.julian.betterday.app.cla.command.*;
-import de.julian.betterday.app.cla.ui.*;
+import de.julian.betterday.app.cla.command.CommandParseException;
+import de.julian.betterday.app.cla.command.Exit;
+import de.julian.betterday.app.cla.command.TopLevelCommandLineController;
 
 public class CommandLineApp extends App {
 
     private UI ui;
-    private CommandParser commandParser;
+    private CommandLineController commandLineController;
 
     @Override
     protected void setup() {
         ui = new DefaultUI();
         ui.outputLine("Hello Julian!\nStill using the Command-Line-App? Well, it's you choice...");
         ui.separator();
-        commandParser = new TopLevelCommandParser();
+        commandLineController = new TopLevelCommandLineController();
     }
 
     @Override
     protected void loop() {
-        outputOptions();
-        Command command = parseNextCommand();
+        outputOptions(); //TODO move to help
+        Command command = null;
+        command = parseNextCommand();
         if (command instanceof Exit) done();
         else command.execute(ui);
     }
 
     private void outputOptions() {
-        ui.outputLine(commandParser.listAvailableCommands());
+        ui.outputLine(commandLineController.listAvailableCommands());
     }
 
     private Command parseNextCommand() {
-        String prompt = commandParser.getPrompt();
+        String prompt = commandLineController.getPrompt();
         String choice = ui.promptInputLine(prompt);
-        return commandParser.parse(choice);
+        return commandLineController.parse(choice.trim());
     }
 
     @Override

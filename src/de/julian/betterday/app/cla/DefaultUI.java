@@ -1,4 +1,6 @@
-package de.julian.betterday.app.cla.ui;
+package de.julian.betterday.app.cla;
+
+import de.julian.betterday.app.cla.UI;
 
 import java.io.InputStream;
 import java.io.PrintStream;
