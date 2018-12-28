@@ -12,39 +12,30 @@ class TimeIntervalTest {
 
     @Test
     void testStringRepresentation() {
-        TimeInterval timeInterval = new TimeInterval(
-                getDateForHourAndMinute(13,0),
-                getDateForHourAndMinute(14,40)
-        );
-        assertEquals("TimeInterval(2018-12-27 13:00 - 14:40)", timeInterval.toString());
+        assertStringRepresentation("TimeInterval(2018-12-27 13:00 - 14:40)", 13, 0, 14, 40);
     }
 
     @Test
     void testArgumentPermutationDoesNotMatter() {
-        Date first = getDateForHourAndMinute(12, 0);
-        Date second = getDateForHourAndMinute(13, 0);
-        TimeInterval one = new TimeInterval(first, second);
-        TimeInterval two = new TimeInterval(second, first);
-        assertEquals(one, two);
+        assertStringRepresentation("TimeInterval(2018-12-27 12:00 - 13:00)", 13, 0, 12, 0);
+        assertStringRepresentation("TimeInterval(2018-12-27 12:00 - 13:00)", 12, 0, 13, 0);
     }
 
     @Test
     void testAccuracyIsUsedForComparison() {
-        TimeInterval one = new TimeInterval(
-                getDateForHourAndMinute(11, 56),
-                getDateForHourAndMinute(12, 48));
-        TimeInterval two = new TimeInterval(
-                getDateForHourAndMinute(12, 4),
-                getDateForHourAndMinute(12, 53));
-        assertEquals(one, two);
+        assertStringRepresentation("TimeInterval(2018-12-27 12:00 - 12:50)", 11, 56, 12, 53);
+        assertStringRepresentation("TimeInterval(2018-12-27 12:00 - 12:50)", 12, 4, 12, 48);
 
-        one = new TimeInterval(
-                getDateForHourAndMinute(11, 54),
-                getDateForHourAndMinute(12, 44));
-        two = new TimeInterval(
-                getDateForHourAndMinute(12, 6),
-                getDateForHourAndMinute(12, 57));
-        assertNotEquals(one, two);
+        assertStringRepresentation("TimeInterval(2018-12-27 11:50 - 12:40)", 11, 54, 12, 44);
+        assertStringRepresentation("TimeInterval(2018-12-27 12:10 - 13:00)", 12, 6, 12, 57);
+    }
+
+    private void assertStringRepresentation(String expectedStringRepresentation, int hour1, int minute1, int hour2, int minute2) {
+        TimeInterval timeInterval = new TimeInterval(
+                getDateForHourAndMinute(hour1, minute1),
+                getDateForHourAndMinute(hour2, minute2)
+        );
+        assertEquals(expectedStringRepresentation, timeInterval.toString());
     }
 
     private Date getDateForHourAndMinute(int hour, int minute) {
