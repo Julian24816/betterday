@@ -30,7 +30,7 @@ public class TimeInterval {
 
     @Override
     public String toString() {
-        DateFormat longDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        DateFormat longDateFormat = new SimpleDateFormat("dd.MM.yyyy HH:mm");
         DateFormat shortDateFormat = getShortestPossibleDateFormatForDifference(begin, end);
         return "TimeInterval(" + longDateFormat.format(begin) + " - " + shortDateFormat.format(end) + ')';
     }
@@ -38,9 +38,9 @@ public class TimeInterval {
     private static DateFormat getShortestPossibleDateFormatForDifference(Date base, Date other) {
         Calendar baseCalendar = getCalendar(base);
         Calendar otherCalendar = getCalendar(other);
-        if (differentAtField(baseCalendar, otherCalendar, Calendar.YEAR)) return new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        if (differentAtField(baseCalendar, otherCalendar, Calendar.MONTH)) return new SimpleDateFormat("MM-dd HH:mm");
-        if (differentAtField(baseCalendar, otherCalendar, Calendar.DAY_OF_MONTH)) return new SimpleDateFormat("dd HH:mm");
+        if (differentAtField(baseCalendar, otherCalendar, Calendar.YEAR)) return new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        if (differentAtField(baseCalendar, otherCalendar, Calendar.MONTH)) return new SimpleDateFormat("dd.MM. HH:mm");
+        if (differentAtField(baseCalendar, otherCalendar, Calendar.DAY_OF_MONTH)) return new SimpleDateFormat("dd. HH:mm");
         return new SimpleDateFormat("HH:mm");
     }
 

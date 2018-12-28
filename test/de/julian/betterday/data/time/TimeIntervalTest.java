@@ -18,7 +18,7 @@ class TimeIntervalTest {
     }
 
     @Test
-    void testAccuracyRounding() {
+    void testRounding() {
         assertCorrectCreation("11:50 - 12:40", 11, 54, 12, 44);
 
         assertCorrectCreation("12:00 - 12:50", 11, 55, 12, 45);
@@ -32,7 +32,7 @@ class TimeIntervalTest {
                 getDateForHourAndMinute(hour1, minute1),
                 getDateForHourAndMinute(hour2, minute2)
         );
-        assertEquals("TimeInterval(2018-12-27 " + expected + ")", timeInterval.toString());
+        assertEquals("TimeInterval(27.12.2018 " + expected + ")", timeInterval.toString());
     }
 
     private Date getDateForHourAndMinute(int hour, int minute) {
