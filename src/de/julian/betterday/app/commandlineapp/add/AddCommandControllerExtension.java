@@ -8,6 +8,6 @@ import java.util.Map;
 public class AddCommandControllerExtension implements ControllerExtension {
     @Override
     public void registerCommandsAt(Map<String, CommandParser> commandMap) {
-        commandMap.put("add", new AddCommandParser("add", "add a new activity"));
+        commandMap.put("add", new AddCommandParser());
     }
 }
