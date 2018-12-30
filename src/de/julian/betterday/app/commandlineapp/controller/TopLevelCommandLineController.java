@@ -26,7 +26,7 @@ public class TopLevelCommandLineController extends CommandLineControllerImpl {
 
     @Override
     public String getPrompt() {
-        return "> ";
+        return "> "; //TODO print last add date before prompt (via extension?)
     }
 
     @Override
