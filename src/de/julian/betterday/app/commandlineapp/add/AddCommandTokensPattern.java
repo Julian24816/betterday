@@ -7,6 +7,7 @@ class AddCommandTokensPattern {
 
     AddCommandTokensPattern(TokenType... tokenTypes) {
         this.tokenTypes = tokenTypes;
+        //TODO assert correct number of token Types
     }
 
     boolean fits(String[] tokens) {
