@@ -16,6 +16,7 @@ class DefaultTimeIntervalParserTest {
 
     @Test
     void testSpecialCaseParsing() {
+        // 12:00 was interpreted as 00:00 when we still used SimpleDateFormat.parse
         assertCorrectParsing("30.12.2018 12:00 - 13:00");
     }
 
