@@ -13,10 +13,14 @@ public class TimeInterval {
 
     private Date begin, end;
 
-    TimeInterval(Date begin, Date end) {
+    public TimeInterval(Date begin, Date end) {
         if (begin.before(end))
             _init(begin, end);
         else _init(end, begin);
+    }
+
+    public static TimeIntervalParser getParser() {
+        return PARSER;
     }
 
     private void _init(Date begin, Date end) {

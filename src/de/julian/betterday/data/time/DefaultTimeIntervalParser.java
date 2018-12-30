@@ -61,20 +61,17 @@ public class DefaultTimeIntervalParser implements TimeIntervalParser {
 
     private TimeInterval parse(String start, String end) throws TimeIntervalParseException {
         Matcher matcher = START_PATTERN.matcher(start);
-        if (!matcher.find())
-            throw new TimeIntervalParseException("Illegal TimeInterval Start String: " + start + " - ...");
+        //noinspection AssertWithSideEffects
+        assert matcher.find() : "illegal state, illegal timeInterval String should never reach this point";
         return parse(getDate(matcher), end);
     }
 
     private TimeInterval parse(Date startDate, String end) throws TimeIntervalParseException {
-        Matcher matcher = END_PATTERN.matcher(end);
-        if (!matcher.find())
-            throw new TimeIntervalParseException("Illegal second half of TimeInterval String: ... - " + end);
-        return new TimeInterval(startDate, getDate(startDate, matcher));
+        return new TimeInterval(startDate, parseDate(startDate, end));
     }
 
     private Date getDate(Matcher matcher) {
-        return getDate(new GregorianCalendar().getTime(), matcher);
+        return getDate(new Date(), matcher);
     }
 
     private Date getDate(Date base, Matcher matcher) {
@@ -85,5 +82,18 @@ public class DefaultTimeIntervalParser implements TimeIntervalParser {
                 calendar.set(field.calendar_constant,
                         Integer.parseInt(matcher.group(field.name)) + field.calendar_value_offset);
         return calendar.getTime();
+    }
+
+    @Override
+    public Date parseDate(String dateTimeString) throws DateTimeParseException {
+        return parseDate(new Date(), dateTimeString);
+    }
+
+    @Override
+    public Date parseDate(Date base, String dateTimeString) throws DateTimeParseException {
+        Matcher matcher = END_PATTERN.matcher(dateTimeString);
+        if (!matcher.find())
+            throw new DateTimeParseException("Illegal dateTime String: " + dateTimeString);
+        return getDate(base, matcher);
     }
 }
