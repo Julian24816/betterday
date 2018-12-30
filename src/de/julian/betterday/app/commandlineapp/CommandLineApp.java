@@ -1,14 +1,14 @@
 package de.julian.betterday.app.commandlineapp;
 
 import de.julian.betterday.app.App;
+import de.julian.betterday.app.commandlineapp.controller.TopLevelCommandLineController;
 
 public class CommandLineApp extends App {
     private UI ui;
     private CommandLineController commandLineController;
-    private CommandLineControllerFactory defaultControllerFactory;
 
-    public CommandLineApp(CommandLineControllerFactory defaultControllerFactory) {
-        this.defaultControllerFactory = defaultControllerFactory;
+    public CommandLineApp(CommandLineController commandLineController) {
+        this.commandLineController = commandLineController;
     }
 
     @Override
@@ -16,7 +16,6 @@ public class CommandLineApp extends App {
         ui = new DefaultUI();
         ui.outputLine("Hello Julian!\nStill using the Command-Line-App? Well, it's you choice...");
         ui.separator();
-        commandLineController = defaultControllerFactory.getCommandLineController();
     }
 
     @Override

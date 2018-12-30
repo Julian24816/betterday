@@ -80,4 +80,9 @@ abstract class CommandLineControllerImpl implements CommandLineController {
     public boolean isExitCommand(Command command) {
         return command instanceof ExitCommand;
     }
+
+    @Override
+    public void applyExtension(ControllerExtension controllerExtension) {
+        controllerExtension.registerCommandsAt(commandMap);
+    }
 }
