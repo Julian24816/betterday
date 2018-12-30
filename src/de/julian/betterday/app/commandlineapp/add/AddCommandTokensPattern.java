@@ -18,7 +18,7 @@ class AddCommandTokensPattern {
         return true;
     }
 
-    public Command parse(String[] tokens) {
+    Command applyTo(String[] tokens) {
         return new AddCommand();
         //TODO implement
     }

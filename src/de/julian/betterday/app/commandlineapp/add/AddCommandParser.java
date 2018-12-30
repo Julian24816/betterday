@@ -28,7 +28,7 @@ class AddCommandParser extends CommandParser {
     private Command findAndApplyPatternOrThrowException(String[] tokens) throws CommandParseException {
         for (AddCommandTokensPattern pattern : PATTERNS)
             if (pattern.fits(tokens))
-                return pattern.parse(tokens);
+                return pattern.applyTo(tokens);
         throw new CommandParseException("Illegal argument sequence for add-command: '" + String.join(" ", tokens) + "'");
     }
 }
