@@ -23,8 +23,8 @@ class DefaultTimeIntervalParserTest {
     @Test
     void testCorrectParsing() {
         assertCorrectParsing("30.12.2018 13:00 - 14:00");
-        assertCorrectParsing("30.12.2018 09:00 - 14:00");
-        assertCorrectParsing("30.12.2018 11:00 - 12:00");
+        assertCorrectParsing("30.12.2018 09:00 - 31. 14:00");
+        assertCorrectParsing("30.12.2018 11:00 - 02.01.2019 12:00");
     }
 
     private void assertCorrectParsing(String timeIntervalString) {
