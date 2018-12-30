@@ -8,18 +8,29 @@ import java.util.Date;
 public class TimeInterval {
     private static final int ACCURACY_IN_MINUTES = 10;
     private static final int ACCURACY_IN_MILLISECONDS = ACCURACY_IN_MINUTES * 60_000;
+
+    private static final TimeIntervalParser PARSER = new DefaultTimeIntervalParser();
+
     private Date begin, end;
 
     TimeInterval(Date begin, Date end) {
-        Date first = begin.before(end) ? begin : end;
-        Date second = end.after(begin) ? end : begin;
-        this.begin = roundToAccuracy(first);
-        this.end = roundToAccuracy(second);
+        if (begin.before(end))
+            _init(begin, end);
+        else _init(end, begin);
+    }
+
+    private void _init(Date begin, Date end) {
+        this.begin = roundToAccuracy(begin);
+        this.end = roundToAccuracy(end);
     }
 
     private static Date roundToAccuracy(Date date) {
         long milliseconds = date.getTime() + ACCURACY_IN_MILLISECONDS/2;
         return new Date(milliseconds / ACCURACY_IN_MILLISECONDS * ACCURACY_IN_MILLISECONDS);
+    }
+
+    static TimeInterval parse(String timeIntervalString) throws TimeIntervalParseException{
+        return PARSER.parse(timeIntervalString);
     }
 
     @Override
