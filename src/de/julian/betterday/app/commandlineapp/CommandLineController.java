@@ -3,9 +3,14 @@ package de.julian.betterday.app.commandlineapp;
 import de.julian.betterday.app.commandlineapp.controller.ControllerExtension;
 
 public interface CommandLineController {
-    Command parse(String string);
+    String getStartupText();
+    String getPrePromptText();
     String getPrompt();
-    String listAvailableCommands();
+    Command parse(String string);
     boolean isExitCommand(Command command);
+    String getExitText();
+
+    String listAvailableCommands();
+
     void applyExtension(ControllerExtension controllerExtension);
 }

@@ -15,7 +15,22 @@ public class TopLevelCommandLineController extends CommandLineControllerImpl {
     }
 
     @Override
+    public String getStartupText() {
+        return "Hello Julian!\nStill using the Command-Line-App? Well, it's you choice...";
+    }
+
+    @Override
+    public String getPrePromptText() {
+        return null;
+    }
+
+    @Override
     public String getPrompt() {
         return "> ";
+    }
+
+    @Override
+    public String getExitText() {
+        return "Bye.";
     }
 }

@@ -14,7 +14,7 @@ public class CommandLineApp extends App {
     @Override
     protected void setup() {
         ui = new DefaultUI();
-        ui.outputLine("Hello Julian!\nStill using the Command-Line-App? Well, it's you choice...");
+        ui.outputLine(commandLineController.getStartupText());
         ui.separator();
     }
 
@@ -27,6 +27,8 @@ public class CommandLineApp extends App {
     }
 
     private Command parseNextCommand() {
+        final String prePromptText = commandLineController.getPrePromptText();
+        if (prePromptText != null) ui.outputLine(prePromptText);
         String prompt = commandLineController.getPrompt();
         String choice = ui.promptInputLine(prompt);
         return commandLineController.parse(choice);
@@ -34,8 +36,8 @@ public class CommandLineApp extends App {
 
     @Override
     protected void teardown() {
+        ui.outputLine(commandLineController.getExitText());
         ui.close();
         ui = null;
-        System.out.println("Bye.");
     }
 }
