@@ -3,6 +3,7 @@ package de.julian.betterday.app.commandlineapp.add;
 import de.julian.betterday.app.commandlineapp.Command;
 import de.julian.betterday.app.commandlineapp.controller.CommandParseException;
 import de.julian.betterday.data.activity.ActivityBuilder;
+import de.julian.betterday.data.time.DateTimeParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -28,9 +29,11 @@ class AddCommandParserTest {
                             .setEndTime("13:00")
                             .build());
             assertEquals(expected, actual);
-        } catch (CommandParseException e) {
+        } catch (CommandParseException | DateTimeParseException e) {
             fail("parsing resulted in an exception", e);
         }
     }
+
+    //TODO implement case where CompleteAddCommand is Returned
 
 }

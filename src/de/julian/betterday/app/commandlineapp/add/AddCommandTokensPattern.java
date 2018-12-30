@@ -1,6 +1,7 @@
 package de.julian.betterday.app.commandlineapp.add;
 
 import de.julian.betterday.app.commandlineapp.Command;
+import de.julian.betterday.data.activity.ActivityBuilder;
 
 class AddCommandTokensPattern {
     private final TokenType[] tokenTypes;
@@ -20,7 +21,12 @@ class AddCommandTokensPattern {
     }
 
     Command applyTo(String[] tokens) {
-        return new AddCommand();
-        //TODO implement
+//        assert !fits(tokens) : "trying to apply pattern to tokens that do not fit the pattern"; TODO why?
+        ActivityBuilder activityBuilder = new ActivityBuilder();
+        int index = 0;
+        for (TokenType tokenType : tokenTypes)
+            tokenType.applyTokenTo(tokens[index++], activityBuilder);
+        if (activityBuilder.isComplete()) return new ConfirmAddCommand(activityBuilder.build());
+        else return new CompleteAddCommand(activityBuilder);
     }
 }
