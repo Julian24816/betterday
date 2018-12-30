@@ -29,7 +29,7 @@ public class TimeInterval {
         return new Date(milliseconds / ACCURACY_IN_MILLISECONDS * ACCURACY_IN_MILLISECONDS);
     }
 
-    static TimeInterval parse(String timeIntervalString) throws TimeIntervalParseException{
+    public static TimeInterval parse(String timeIntervalString) throws TimeIntervalParseException{
         return PARSER.parse(timeIntervalString);
     }
 
